@@ -115,6 +115,9 @@ function Home() {
 
     console.log(data, "out");
   }
+  function writeToCharacteristic(characteristic, data) {
+    characteristic.writeValue(new TextEncoder().encode(data));
+  }
   return (
     <>
       <button className="btn" onClick={connectClick}>
