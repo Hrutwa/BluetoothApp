@@ -1,23 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { Navigate } from "react-router-dom";
-import { auth } from "../utils/firebase";
+import React, { useContext } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
+import LoadingSpinner from "../components/LoadingSpinner";
 
-export default function ({ children }) {
-  const User = useContext(UserContext);
-  useEffect(() => {
-    const listener = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        User.setAuthUser(user);
-      } else {
-        User.setAuthUser(null);
-      }
-    });
-  }, []);
-
-  if (!User.authUser) {
-    return <Navigate to="/signIn" />;
+const RequireAuth = ({ children }) => {
+  const { authUser, loading } = useContext(UserContext);
+  const navigate = useNavigate();
+  if (loading) {
+    return <LoadingSpinner />;
   }
-  return children;
-}
+
+  return authUser ? <>{children}</> : <Navigate to="/signin" />;
+};
+export default RequireAuth;
