@@ -8,13 +8,13 @@ import { getAuth } from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+  apiKey: "AIzaSyAn8cm4IehrfmJJaOeqh0xhwj5iGvq2pfs",
+  authDomain: "bluetoothapp-4879b.firebaseapp.com",
+  projectId: "bluetoothapp-4879b",
+  storageBucket: "bluetoothapp-4879b.appspot.com",
+  messagingSenderId: "320935716700",
+  appId: "1:320935716700:web:e3eea835825af817214399",
+  measurementId: "G-0NTTF2704X",
 };
 
 // Initialize Firebase

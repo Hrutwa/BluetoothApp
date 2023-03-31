@@ -15,7 +15,6 @@ function App() {
     signOut(auth)
       .then(() => {
         setAuthUser(null);
-        console.log("logged out");
       })
       .catch((error) => {
         console.log(error);

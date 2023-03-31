@@ -25,7 +25,6 @@ function SignUp() {
     if (formData.password === formData.confirmPassword) {
       createUserWithEmailAndPassword(auth, formData.email, formData.password)
         .then((userCredential) => {
-          console.log(userCredential);
           toast.success("Successfully Created!");
           setFormData({
             email: "",
@@ -34,7 +33,6 @@ function SignUp() {
           });
         })
         .catch((error) => {
-          console.log(error);
           toast.error("Try again a different email");
         });
     } else {
