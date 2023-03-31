@@ -24,11 +24,11 @@ function App() {
 
   return (
     <>
-      <UserContext.Provider value={{ authUser, setAuthUser, userSignOut }}>
-        <BrowserRouter>
+      <BrowserRouter>
+        <UserContext.Provider value={{ authUser, setAuthUser, userSignOut }}>
           <Routes>
-            <Route path="/signIn" element={<SignIn />} />
-            <Route path="/signUp" element={<SignUp />} />
+            <Route exact path="/signIn" element={<SignIn />} />
+            <Route exact path="/signUp" element={<SignUp />} />
             <Route
               path="/"
               element={
@@ -38,8 +38,8 @@ function App() {
               }
             />
           </Routes>
-        </BrowserRouter>
-      </UserContext.Provider>
+        </UserContext.Provider>
+      </BrowserRouter>
     </>
   );
 }
