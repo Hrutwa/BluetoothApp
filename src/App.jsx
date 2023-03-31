@@ -6,13 +6,12 @@ import SignIn from "./pages/SignIn";
 import Home from "./pages/Home";
 import RequireAuth from "./utils/RequireAuth";
 import "./styles/App.css";
-import { useEffect } from "react";
 
 import { createContext, useState } from "react";
 export const UserContext = createContext(null);
 function App() {
   const [authUser, setAuthUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+
   const userSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -22,23 +21,10 @@ function App() {
         console.log(error);
       });
   };
-  useEffect(() => {
-    const listener = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setAuthUser(user);
-        setLoading(false);
-      } else {
-        setAuthUser(null);
-      }
-    });
-    listener();
-  }, []);
 
   return (
     <>
-      <UserContext.Provider
-        value={{ authUser, setAuthUser, userSignOut, loading }}
-      >
+      <UserContext.Provider value={{ authUser, setAuthUser, userSignOut }}>
         <BrowserRouter>
           <Routes>
             <Route path="/signIn" element={<SignIn />} />
