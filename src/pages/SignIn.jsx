@@ -1,17 +1,19 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Sign.css";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { UserContext } from "../App";
 
-function SignUp() {
+function SignIn() {
+  const User = useContext(UserContext);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    confirmPassword: "",
   });
   const onChange = (event) => {
     const newData = event.target.value;
@@ -20,33 +22,25 @@ function SignUp() {
       [event.target.name]: newData,
     });
   };
-  const signUp = (event) => {
+  const signIn = (event) => {
     event.preventDefault();
-    if (formData.password === formData.confirmPassword) {
-      createUserWithEmailAndPassword(auth, formData.email, formData.password)
-        .then((userCredential) => {
-          console.log(userCredential);
-          toast.success("Successfully Created!");
-          setFormData({
-            email: "",
-            password: "",
-            confirmPassword: "",
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-          toast.error("Try again a different email");
-        });
-    } else {
-      toast.error("Password's don't match!");
-    }
+    signInWithEmailAndPassword(auth, formData.email, formData.password)
+      .then((userCredential) => {
+        User.setAuthUser(userCredential);
+        toast.success("Successfully Logged In!");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Incorrect Email/Password!");
+      });
   };
   return (
     <>
       <div className="container">
         <p className="heading-text">Bluetooth App</p>
-        <p className="heading-subtext">Create an account</p>
-        <form onSubmit={signUp} className="form-container">
+        <p className="heading-subtext">Login</p>
+        <form onSubmit={signIn} className="form-container">
           <input
             type="email"
             name="email"
@@ -64,18 +58,10 @@ function SignUp() {
             onChange={onChange}
             placeholder="Password"
           />
-          <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            className="input"
-            onChange={onChange}
-            placeholder="Confirm Password"
-          />
-          <input type="submit" value="Sign Up" className="submit-btn" />
+          <input type="submit" value="Login" className="submit-btn" />
         </form>
         <p>
-          Already have an account? <Link to={"/signIn"}>Sign In</Link>
+          Don't have an account? <Link to={"/signUp"}>Sign Up</Link>
         </p>
       </div>
       <ToastContainer
@@ -94,4 +80,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignIn;

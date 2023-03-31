@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../styles/Home.css";
+import { auth } from "../utils/firebase";
+import { UserContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const [deviceCache, setdeviceCache] = useState(null);
+  const [characteristicCache, setcharacteristicCache] = useState(null);
+  const User = useContext(UserContext);
+  const navigate = useNavigate();
   //Disconnect Event handler
   const connectClick = () => {
     connect();
@@ -10,13 +17,11 @@ function Home() {
   const disconnectClick = () => {
     disconnect();
   };
+  //Receive response Event handler
   const handleClick = (e) => {
     console.log("Your Sent Input" + e.target.value);
     send(e.target.value);
   };
-
-  const [deviceCache, setdeviceCache] = useState(null);
-  const [characteristicCache, setcharacteristicCache] = useState(null);
 
   // Launch Bluetooth device chooser and connect to the selected
   function connect() {
@@ -120,6 +125,9 @@ function Home() {
   }
   return (
     <>
+      <div>
+        {User.authUser && <button onClick={User.userSignOut}>Sign Out</button>}
+      </div>
       <button className="btn" onClick={connectClick}>
         Connect
       </button>
