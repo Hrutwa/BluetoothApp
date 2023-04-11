@@ -139,17 +139,17 @@ function Home() {
       )}
       {deviceCache && (
         <button className="btn" value={1} onClick={handleClick}>
-          Stop
+          Turn on Bike
         </button>
       )}
       {deviceCache && (
         <button className="btn" value={2} onClick={handleClick}>
-          Ignition
+          Start Engine
         </button>
       )}
       {deviceCache && (
-        <button className="btn" value={3} onClick={handleClick}>
-          Start
+        <button className="btn" value={0} onClick={handleClick}>
+          Turn Off Engine
         </button>
       )}
     </>
