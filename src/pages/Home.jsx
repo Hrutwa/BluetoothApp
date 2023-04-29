@@ -26,11 +26,11 @@ function Home() {
   // Launch Bluetooth device chooser and connect to the selected
   function connect() {
     return (
-      deviceCache ? Promise.resolve(deviceCache) : requestBluetoothDevice()
-    )
-      .then((device) => connectDeviceAndCacheCharacteristic(device))
-      .then((characteristic) => startNotifications(characteristic))
-      .catch((error) => console.log(error));
+      (deviceCache ? Promise.resolve(deviceCache) : requestBluetoothDevice())
+        .then((device) => connectDeviceAndCacheCharacteristic(device))
+        // .then((characteristic) => startNotifications(characteristic))
+        .catch((error) => console.log(error))
+    );
   }
   //Function that scans available devices
   function requestBluetoothDevice() {
