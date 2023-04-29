@@ -19,7 +19,6 @@ function Home() {
   };
   //Receive response Event handler
   const handleClick = (e) => {
-    console.log("Your Sent Input" + e.target.value);
     send(e.target.value);
   };
 
@@ -117,8 +116,6 @@ function Home() {
     } else {
       writeToCharacteristic(characteristicCache, data);
     }
-
-    console.log(data, "out");
   }
   function writeToCharacteristic(characteristic, data) {
     characteristic.writeValue(new TextEncoder().encode(data));
