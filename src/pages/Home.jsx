@@ -96,12 +96,14 @@ function Home() {
   //Send data to controller
   function send(data) {
     data = String(data);
-
+  
     if (!data || !characteristicCache) {
       return;
     }
-
-    writeToCharacteristic(characteristicCache, data);
+  
+    setTimeout(() => {
+      writeToCharacteristic(characteristicCache, data);
+    }, 100);
   }
   function writeToCharacteristic(characteristic, data) {
     characteristic.writeValue(new TextEncoder().encode(data));
