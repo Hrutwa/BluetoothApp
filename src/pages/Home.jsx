@@ -19,7 +19,7 @@ function Home() {
   };
   //Receive response Event handler
   const handleClick = (e) => {
-    send(e.target.value);
+    send(e.currentTarget.value);
   };
 
   // Launch Bluetooth device chooser and connect to the selected
